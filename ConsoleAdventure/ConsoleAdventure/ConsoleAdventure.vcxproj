@@ -124,12 +124,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Action.cpp" />
-    <ClCompile Include="Command.cpp" />
     <ClCompile Include="Mein.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Action.h" />
-    <ClInclude Include="Command.h" />
     <ClInclude Include="Commands.h" />
     <ClInclude Include="UshirisCppExtend.h" />
   </ItemGroup>
