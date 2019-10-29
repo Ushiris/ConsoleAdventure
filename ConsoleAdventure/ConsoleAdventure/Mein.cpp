@@ -7,7 +7,7 @@
 #include "Commands.h"
 
 using namespace std;
-using namespace CommandName;
+using namespace CommandString;
 
 constexpr auto COMMAND_SPLIT_KEY = ' ';
 
@@ -22,6 +22,7 @@ vector<string> command_input(char key)
 	return commands;
 }
 
+//command‚ÌŽÀ‘••”•ª
 void command_run(vector<string> commands)
 {
 	int skip = 0;
@@ -30,9 +31,11 @@ void command_run(vector<string> commands)
 	{
 	{"text",false},
 	{"hide",true},
-	{"showed",false}
+	{"showed",false},
+	{"last",false}
 	};
 
+	unsigned int idx = 0;
 	for(const auto &word:commands)
 	{
 		//errors
@@ -42,8 +45,14 @@ void command_run(vector<string> commands)
 			break;
 		}
 
-		//update
-		if (word == CommandName::cend && flags.at("text"))
+		//last check
+		if (idx >= commands.size() - 1)
+		{
+			flags.at("last") = true;
+		}
+
+		//plain text
+		if (word == CommandString::cEnd && flags.at("text"))
 		{
 			flags.at("text") = false;
 			cout << "\"" << endl;
@@ -51,11 +60,14 @@ void command_run(vector<string> commands)
 		}
 		else if (flags.at("text"))
 		{
+			if (flags.at("last"))
+			{
+				cout << "Command warning:Not end comment"<< endl;
+			}
 			cout << (isTextBegin ? "" : " ") << word;
 			isTextBegin = false;
 			continue;
 		}
-
 
 		//skip commands
 		if (skip)
@@ -70,12 +82,12 @@ void command_run(vector<string> commands)
 		}
 		
 		//effects
-		if (word == show && !flags.at("showed"))
+		if (word == echo && !flags.at("showed"))
 		{
 			command_echo(commands);
 			flags.at("showed") = true;
 		}
-		else if (word == CommandName::exit)
+		else if (word == CommandString::exit)
 		{
 			exit_adv(0);
 		}
@@ -85,10 +97,14 @@ void command_run(vector<string> commands)
 			isTextBegin = true;
 			cout << "\"";
 		}
+
+		idx++;
 	}
 
 	cout << endl;
 }
+
+
 
 int main(void)
 {

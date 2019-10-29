@@ -5,7 +5,7 @@
 #include <vector>
 
 constexpr auto COMMAND_MAX_LENGTH = 999;
-constexpr auto COMMAND_ERROR_MESSAGE = "Error";
+constexpr auto COMMAND_ERROR_MESSAGE = "Error ! ! ! ! !";
 
 using namespace std;
 
@@ -52,6 +52,7 @@ vector<string> split(const string str, const char key)
 	}
 
 	vector<string> result;
+
 	unsigned int index = 0;
 	while (str.find(key, index) != string::npos)
 	{
