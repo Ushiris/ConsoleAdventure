@@ -7,7 +7,7 @@
 #include "Commands.h"
 
 using namespace std;
-using namespace CommandString;
+using namespace CommandSystem;
 
 constexpr auto COMMAND_SPLIT_KEY = ' ';
 
@@ -52,7 +52,7 @@ void command_run(vector<string> commands)
 		}
 
 		//plain text
-		if (word == CommandString::cEnd && flags.at("text"))
+		if (word == dictionaly. && flags.at("text"))
 		{
 			flags.at("text") = false;
 			cout << "\"" << endl;
@@ -87,7 +87,7 @@ void command_run(vector<string> commands)
 			command_echo(commands);
 			flags.at("showed") = true;
 		}
-		else if (word == CommandString::exit)
+		else if (word == CommandSystem::exit)
 		{
 			exit_adv(0);
 		}
@@ -108,6 +108,7 @@ void command_run(vector<string> commands)
 
 int main(void)
 {
+	CommandSystem::setup();
 	while (true)
 	{
 		vector<string> commands;

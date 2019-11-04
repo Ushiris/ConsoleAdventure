@@ -2,63 +2,48 @@
 #include <string>
 #include <vector>
 
-#define ADD_COMMAND( str ) const string str=#str; CommandStringList.push_back( #str ); 
-
 using std::string;
 
-namespace CommandString
+enum CommandMean:int
+{
+	echo,
+	app_exit,
+	no,
+	comment,
+	commentEnd,
+	error_ushiris,
+}; 
+
+namespace CommandSystem
 {
 	vector<string> CommandStringList;
 
-	void CreateCommandStringList()
+	const vector<std::pair<CommandMean,string>> command_list=
 	{
-		ADD_COMMAND(echo);
-	}
-
-	const string
-		echo = "echo",
-		exit = "exit",
-		no = "no",
-		comment = "comment|",
-		cEnd = "|",
-		error = "Error",
-		jp_echo = "表示",
-		jp_exit = "終了",
-		jp_comment = "コメント（",
-		jp_cEnd = "）";
-}
-
-using namespace CommandString;
-
-class CommandCompiler
-{
-public:
-	enum CommandMean
-	{
-		echo,
-		exit,
-		no,
-		comment,
-		cEnd,
+	{echo,"echo"},
+	{app_exit,"exit"},
+	{no,"no"},
+	{comment,"c["},
+	{commentEnd,"]c"}
 	};
 
-	CommandCompiler();
-	~CommandCompiler();
-
-	static CommandMean CommandCompile(string command_str)
+	void setup()
 	{
-
+		for (const auto comm : command_list)
+		{
+			add_command(comm);
+		}
 	}
 
-private:
-	map<string, CommandMean> CommandDictionary;
+	void add_command(CommandMean mean,string command)
+	{
+		dictionaly.insert(std::pair<CommandMean, string>(mean, command));
+	}
 
-};
+	void add_command(std::pair<CommandMean, string> comm)
+	{
+		dictionaly.insert(comm);
+	}
 
-CommandCompiler::CommandCompiler()
-{
-}
-
-CommandCompiler::~CommandCompiler()
-{
+	multimap<CommandMean,string> dictionaly;
 }
