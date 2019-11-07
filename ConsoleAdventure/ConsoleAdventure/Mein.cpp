@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <algorithm>
 #include "UshirisCppExtend.h"
 #include "Action.h"
 #include "Commands.h"
@@ -27,13 +28,6 @@ void command_run(vector<string> commands)
 {
 	int skip = 0;
 	bool isTextBegin = true;
-	map<string, bool> flags =
-	{
-	{"text",false},
-	{"hide",true},
-	{"showed",false},
-	{"last",false}
-	};
 
 	unsigned int idx = 0;
 	for(const auto &word:commands)
@@ -52,7 +46,7 @@ void command_run(vector<string> commands)
 		}
 
 		//plain text
-		if (word == dictionaly. && flags.at("text"))
+		if (IsMeaning(word,commentEnd) && flags.at("text"))
 		{
 			flags.at("text") = false;
 			cout << "\"" << endl;
@@ -75,23 +69,23 @@ void command_run(vector<string> commands)
 			skip--;
 			continue;
 		}
-		if (word == no)
+		if (IsMeaning(word,no))
 		{
 			skip++;
 			continue;
 		}
 		
 		//effects
-		if (word == echo && !flags.at("showed"))
+		if (IsMeaning(word,echo) && !flags.at("showed"))
 		{
 			command_echo(commands);
 			flags.at("showed") = true;
 		}
-		else if (word == CommandSystem::exit)
+		else if (IsMeaning(word,app_exit))
 		{
 			exit_adv(0);
 		}
-		else if (word == comment)
+		else if (IsMeaning(word,comment))
 		{
 			flags.at("text") = true;
 			isTextBegin = true;
@@ -105,10 +99,11 @@ void command_run(vector<string> commands)
 }
 
 
-
 int main(void)
 {
 	CommandSystem::setup();
+	cout << "setup successed!" << endl;
+
 	while (true)
 	{
 		vector<string> commands;
