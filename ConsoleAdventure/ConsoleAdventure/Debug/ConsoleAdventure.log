@@ -1,2 +1,5 @@
-﻿  Action.cpp
-  ConsoleAdventure.vcxproj -> C:\Users\yuugo\Documents\ConsoleAdventure\ConsoleAdventure\Debug\ConsoleAdventure.exe
+﻿  Main.cpp
+  UshirisCppExtend.cpp
+  コードを生成中...
+UshirisCppExtend.obj : error LNK2005: "class std::vector<class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,class std::allocator<class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > > > ERROR_REASON" (?ERROR_REASON@@3V?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@A) は既に Main.obj で定義されています。
+C:\Users\yuugo\Documents\ConsoleAdventure\ConsoleAdventure\Debug\ConsoleAdventure.exe : fatal error LNK1169: 1 つ以上の複数回定義されているシンボルが見つかりました。

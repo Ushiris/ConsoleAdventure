@@ -2,6 +2,12 @@
 #include <string>
 #include <vector>
 
+using std::string;
+using std::vector;
+using std::multimap;
+using std::map;
+using std::pair;
+
 enum CommandMean:int
 {
 	echo,
@@ -12,26 +18,37 @@ enum CommandMean:int
 	error_ushiris,
 }; 
 
-namespace CommandSystem
-{
-	using std::string;
 
+class CommandSystem
+{
+public:
 	multimap<CommandMean, string> dictionaly;
-	map<string, bool> flags =
+	map<string, bool> def_flags =
 	{
 	{"text",false},
 	{"hide",true},
 	{"showed",false},
-	{"last",false}
+	{"last",false},
+	{"beginText",false}
 	};
+	int skip = 0;
+	map<string, bool> flags;
 
 	const vector<std::pair<CommandMean, string>> command_list =
 	{
 	{echo,"echo"},
+	{echo,"コマンド表示"},
 	{app_exit,"exit"},
+	{app_exit,"終了"},
+	{app_exit,"閉じる"},
+	{app_exit,"ログアウト"},
 	{no,"no"},
+	{no,"ignore"},
+	{no,"無視"},
 	{comment,"c["},
-	{commentEnd,"]c"}
+	{comment,"※"},
+	{commentEnd,"]c"},
+	{commentEnd,"※※"},
 	};
 
 	void add_command(std::pair<CommandMean, string> comm)
@@ -45,6 +62,7 @@ namespace CommandSystem
 		{
 			add_command(comm);
 		}
+		flags = def_flags;
 	}
 
 	bool IsMeaning(string input, CommandMean mean)
@@ -66,4 +84,11 @@ namespace CommandSystem
 
 		return false;
 	}
-}
+
+	void reset_flags()
+	{
+		flags = def_flags;
+		skip = 0;
+	}
+
+};

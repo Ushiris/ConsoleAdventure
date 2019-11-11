@@ -124,7 +124,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Action.cpp" />
-    <ClCompile Include="Mein.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="UshirisCppExtend.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Action.h" />

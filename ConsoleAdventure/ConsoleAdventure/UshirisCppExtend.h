@@ -1,66 +1,23 @@
 #pragma once
-
-#include <iostream>
-#include <string>
 #include <vector>
+#include <string>
 
-constexpr auto COMMAND_MAX_LENGTH = 999;
-constexpr auto COMMAND_ERROR_MESSAGE = "Error ! ! ! ! !";
+using std::vector;
+using std::string;
 
-using namespace std;
+const int COMMAND_MAX_LENGTH = 999;
+const string COMMAND_ERROR_MESSAGE = "Error ! ! ! ! !";
+const string COMMAND_ERROR_RESON_DEFAULT = "undifined";
+vector<string> ERROR_REASON = { COMMAND_ERROR_RESON_DEFAULT };
 
-bool splitErrorCheck(const string str,const char key)
-{
-	if (str.length() == 0)
-	{
-		cout << "String error:Null" << endl;
-		return true;
-	}
+bool split_error_check(const string str, const char key);
 
-	if (str.length() >= COMMAND_MAX_LENGTH)
-	{
-		cout << "String error:Too long" << endl;
-		return true;
-	}
+vector<string> split(const string str, const char key);
 
-	if (str.back() == key)
-	{
-		cout << "String error:Back is \'" << key << '\'' << endl;
-	}
+void cout_strs(vector<string> strs);
 
-	bool isBlank = true;
-	for (const auto &ch : str)
-	{
-		if (ch != key)
-		{
-			isBlank = false;
-			break;
-		}
-	}
-	if (isBlank)
-	{
-		cout << "String error:Is \'" << key << "\' only string" << endl;
-	}
-	return isBlank;
-}
+void add_error_reason(string message);
 
-vector<string> split(const string str, const char key)
-{
-	if (splitErrorCheck(str, key))
-	{
-		return vector<string>(1, COMMAND_ERROR_MESSAGE);
-	}
+void reset_error_reason();
 
-	vector<string> result;
-
-	unsigned int index = 0;
-	while (str.find(key, index) != string::npos)
-	{
-		string word = str.substr(index, str.find(key, index) - index);
-		result.push_back(word);
-		index = str.find(key, index) + 1;
-	}
-	result.push_back(str.substr(index, str.length()));
-
-	return result;
-}
+void pop_error_reason();
