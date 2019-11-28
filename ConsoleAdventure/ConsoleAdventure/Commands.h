@@ -2,6 +2,8 @@
 #include <string>
 #include <vector>
 
+#define MAKE_STR(x) const static string x = #x
+
 using std::string;
 using std::vector;
 using std::multimap;
@@ -16,8 +18,18 @@ enum CommandMean:int
 	comment,
 	commentEnd,
 	error_ushiris,
-}; 
+};
 
+namespace FlagString
+{
+	MAKE_STR(text);
+	MAKE_STR(hide);
+	MAKE_STR(showed);
+	MAKE_STR(last);
+	MAKE_STR(beginText);
+};
+
+using namespace FlagString;
 
 class CommandSystem
 {
@@ -25,11 +37,11 @@ public:
 	multimap<CommandMean, string> dictionaly;
 	map<string, bool> def_flags =
 	{
-	{"text",false},
-	{"hide",true},
-	{"showed",false},
-	{"last",false},
-	{"beginText",false}
+	{text,false},
+	{hide,true},
+	{showed,false},
+	{last,false},
+	{beginText,false}
 	};
 	int skip = 0;
 	map<string, bool> flags;
