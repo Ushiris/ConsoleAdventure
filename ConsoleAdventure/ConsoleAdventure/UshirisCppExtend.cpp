@@ -2,11 +2,13 @@
 
 #include <iostream>
 
+
 using std::cin;
 using std::cout;
 using std::endl;
+using namespace Ushiris;
 
-bool split_error_check(const string str, const char key)
+bool Ushiris::split_error_check(const string str, const char key)
 {
 	if (str.length() == 0)
 	{
@@ -41,7 +43,7 @@ bool split_error_check(const string str, const char key)
 	return isBlank;
 }
 
-vector<string> split(const string str, const char key)
+vector<string> Ushiris::split(const string str, const char key)
 {
 	if (split_error_check(str, key))
 	{
@@ -62,7 +64,7 @@ vector<string> split(const string str, const char key)
 	return result;
 }
 
-void cout_strs(vector<string> strs)
+void Ushiris::cout_strs(vector<string> strs)
 {
 	for (auto str : strs)
 	{
@@ -70,7 +72,7 @@ void cout_strs(vector<string> strs)
 	}
 }
 
-void add_error_reason(string message)
+void Ushiris::add_error_reason(string message)
 {
 	if (ERROR_REASON.front() == COMMAND_ERROR_RESON_DEFAULT)
 	{
@@ -83,12 +85,12 @@ void add_error_reason(string message)
 	}
 }
 
-void reset_error_reason()
+void Ushiris::reset_error_reason()
 {
 	ERROR_REASON = { COMMAND_ERROR_RESON_DEFAULT };
 }
 
-void pop_error_reason()
+void Ushiris::pop_error_reason()
 {
 	cout_strs(ERROR_REASON);
 	reset_error_reason();

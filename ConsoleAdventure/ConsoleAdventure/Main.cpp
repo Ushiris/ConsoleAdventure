@@ -10,6 +10,7 @@
 using std::cin;
 using std::cout;
 using std::endl;
+using namespace Ushiris::Command;
 
 constexpr char COMMAND_SPLIT_KEY = ' ';
 
